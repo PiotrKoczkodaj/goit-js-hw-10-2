@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { fetchCountries } from './fetchCountries';
 const DEBOUNCE_DELAY = 300;
 export const input = document.querySelector('#search-box');
+const list = document.querySelector('.country-list');
 
 const handler = _.debounce(() => {
 
@@ -14,13 +15,33 @@ const handler = _.debounce(() => {
         
     if (name === '') {
     input.removeEventListener('input',handler);
-}
+        }
+    
         response.map((res) => {
         let nameOfficial = res.name.official;
         let capitalsArray = res.capital;
         let population = res.population;
         let flags = res.flags.svg;
-        let language = Object.values(res.languages);
+            let language = Object.values(res.languages);
+            
+             if (response.length > 10) {
+            return alert('DOKLADNIEJ');
+             }
+            if (response.length < 2) {
+                list.innerHTML = `
+                <li>${nameOfficial}</li>
+                <li>
+                <img src="${flags}" width="60" height="70" >
+                </li>
+                <li>${capitalsArray}</li>
+                <li>${population}</li>
+                <li>${language}</li>
+                `
+            }
+            list.innerHTML += `
+            <li>${nameOfficial}</li>
+            <li><img src="${flags}" width="60" height="70" ></li>
+            `
 
             console.log(res);
      })   
