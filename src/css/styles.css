@@ -10,9 +10,11 @@ body {
   background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
+  background-color: cornsilk;
 }
 
 #search-box {
+  border-radius: 14px;
   font: inherit;
   padding: 8px;
   max-width: 320px;

@@ -8,9 +8,13 @@ const DEBOUNCE_DELAY = 300;
 export const input = document.querySelector('#search-box');
 const list = document.querySelector('.country-list');
 
-
+input.placeholder = "Enter your country"
 
 const handler = _.debounce(() => {
+    if (!input.value) {
+        list.innerHTML = '';
+        
+    }
     fetchCountries(name).then((response) => {
         return response.json();
     }).then((response) => {
