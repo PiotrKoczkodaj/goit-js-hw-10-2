@@ -18,3 +18,16 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+
+.listItem{
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.listItem p {
+  font-weight: 700;
+  margin-left: 8px;
+}

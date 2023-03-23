@@ -4,8 +4,11 @@ import Notiflix from 'notiflix';
 import { fetchCountries } from './fetchCountries';
 const DEBOUNCE_DELAY = 300;
 
+
 export const input = document.querySelector('#search-box');
 const list = document.querySelector('.country-list');
+
+
 
 const handler = _.debounce(() => {
     fetchCountries(name).then((response) => {
@@ -23,17 +26,35 @@ const handler = _.debounce(() => {
     
             if (response.length === 1) {
                 list.innerHTML = `
-                <li>${nameOfficial}</li>
-                <li>
-                <img src="${flags}" width="60" height="70" >
+                <li class="flag">
+                <img src='${flags}' width="100" height="60" >
                 </li>
-                <li>${capitalsArray}</li>
-                <li>${population}</li>
-                <li>${language}</li>
-                `} else {
-                  list.innerHTML += `
-            <li>${nameOfficial}</li>
-            <li><img src="${flags}" width="60" height="70" ></li>
+                <li class="name">${nameOfficial}</li>
+                <li class="item"><span class="spanCapital">Capital:</span>${capitalsArray}</li>
+                <li class="item"><span class="spanPopulation">Population:</span>${population}</li>
+                <li class="item"><span class="spanLanguages">Languages:</span>${language}</li>
+                `;
+                const name = document.querySelector(".name");
+                const spanCapital = document.querySelector('.spanCapital');
+                const spanPopulation = document.querySelector('.spanPopulation');
+                const spanLanguages = document.querySelector('.spanLanguages');
+                spanPopulation.style.fontWeight = "700";
+                spanLanguages.style.fontWeight = "700";
+                spanCapital.style.fontWeight = "700";
+                name.style.position = 'relative';
+                name.style.fontSize = '26px';
+                name.style.top = '-56px';
+                name.style.left = '112px';
+                name.style.fontWeight = '700';
+                list.style.listStyleType = "none";
+            };
+            if (response.length > 1) {
+                
+                list.innerHTML += `
+            <li class="listItem">
+            <img src='${flags}' width="100" height="60">
+            <p>${nameOfficial}</p>
+            </li>
             `};
      })   
     }).catch((error) => {
@@ -42,7 +63,6 @@ const handler = _.debounce(() => {
 }, DEBOUNCE_DELAY);
 
 input.addEventListener('input', handler)
-
 
 
 
