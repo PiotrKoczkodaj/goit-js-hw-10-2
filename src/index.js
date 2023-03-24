@@ -11,10 +11,8 @@ const list = document.querySelector('.country-list');
 input.placeholder = "Enter your country"
 
 const handler = _.debounce(() => {
-    if (!input.value) {
-        list.innerHTML = '';
-        
-    }
+    
+   
     fetchCountries(name).then((response) => {
         return response.json();
     }).then((response) => {
@@ -53,13 +51,17 @@ const handler = _.debounce(() => {
                 list.style.listStyleType = "none";
             };
             if (response.length > 1) {
-                
-                list.innerHTML += `
+            
+                input.addEventListener("keydown", () => {
+                    list.innerHTML = "";
+                    console.log(input.value)
+                });
+            list.innerHTML += `
             <li class="listItem">
             <img src='${flags}' width="100" height="60">
             <p>${nameOfficial}</p>
             </li>
-            `};
+            `};   
      })   
     }).catch((error) => {
         return Notiflix.Notify.failure('Oops, there is no country with that name')
