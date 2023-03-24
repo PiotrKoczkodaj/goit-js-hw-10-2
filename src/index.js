@@ -54,7 +54,6 @@ const handler = _.debounce(() => {
             
                 input.addEventListener("keydown", () => {
                     list.innerHTML = "";
-                    console.log(input.value)
                 });
             list.innerHTML += `
             <li class="listItem">
@@ -69,8 +68,5 @@ const handler = _.debounce(() => {
 }, DEBOUNCE_DELAY);
 
 input.addEventListener('input', handler)
-
-
-
 
 
